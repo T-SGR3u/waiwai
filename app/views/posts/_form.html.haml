@@ -1,0 +1,44 @@
+-# -if post.errors.present?
+-#   %ul#error_explanation
+-#     -post.errors.full_messages.each do |message|
+-#       %li 
+-#         = message
+
+.container.col-8.mt-1.text-center
+  = form_with model: @post, local: true do |f|
+    .form-group
+      .label-name.text-left.col-5
+        %h2.text-success
+          = f.label :name
+          = f.text_field :name,class:"form-control",placeholder:"お店の名前を入力してください"
+
+    .form-group
+      .label-name.text-left.col-2
+        %h2.mr-2.text-success
+          = f.label :score
+          = f.text_field :score,class:"form-control",type:"number",step:"0.5",max:"5",placeholder:"点数"
+      .heads-up.ml-4.text-left
+        ※5点満点
+
+    .form-group
+      .label-name.text-left.col-10
+        .text-success
+          %h2
+            = f.label :image
+          %h6.col-5
+            = f.file_field :image, class:"form-control-file"
+
+    .form-group
+      .label-name.text-left.col-8
+        %h2.text-success
+          = f.label :review
+          = f.text_area :review ,class:"form-control",placeholder:"評価・感想を入力してください",rows:"5"
+
+    .form-group
+      .label-name.text-left.col-10
+        %h2.text-success
+          = f.label :link
+          = f.url_field :link,class:"form-control",placeholder:"URLを貼り付けてください"
+          
+    %button.btn.btn
+      = f.submit nil, class:"btn btn-success"

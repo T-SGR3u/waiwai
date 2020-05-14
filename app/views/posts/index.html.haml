@@ -1,0 +1,69 @@
+.container.d-flex.justify-content-center.mt-5
+  %h1.display-4.title
+    W A I W A I
+  %h4.beer-icon.ml-1
+    = icon("fas fa-beer",class: "beer-icon")
+
+.container.text-center
+  -if user_signed_in?
+    %button.btn.btn.bg-success.col-3.mt-2.mb-3.text-white
+      = link_to new_post_path , class:"new-post-btn" do
+        %h3.new-post-btn NEW POST !
+  -else
+    %h2.mt-2 You can post if you "Login" !
+
+.container.fluid
+  .card-deck
+    - @posts.each do |post|
+      .row
+        .col
+          .card.mt-4.ml-6{style:"width:15rem"}
+            %img.card-img-top
+              -if post.image.attached?
+                = image_tag post.image, height: '140px', width: '100%'
+              -else
+                .no-image-message.text-center.bg-secondary
+                  No image
+            %h5.card-img-overlay
+              .user-name.text-center.rounded.bg-dark.text-white{style:"width:4rem"}
+                = post.user.name
+            .card-body
+              %h5.store-name
+                = post.name
+              .review
+                = post.review
+            .heart-count
+            .d-flex.justify-content-end
+              .form-inline.mr-3
+                .score-icon.text-warning.mr-2
+                  =icon("fa","star",class:"score-icon")
+                %h4.mt-2.user-score
+                  = post.score
+
+            .btn-group.bg-success
+              .card-btn
+              -if user_signed_in?
+                -if current_user.already_liked?(post)
+                  %button.btn.btn
+                    .d-flex.form-inline.justify-content-center
+                      = link_to post_like_path(post,post.id),class:"already-heart-btn" ,method: :delete ,remote: true do
+                        =icon("fa","heart")
+                      .heart-count.ml-3
+                        =post.likes.count
+                -else
+                  %button.btn.btn
+                    .d-flex.form-inline.justify-content-center
+                      = link_to post_likes_path(post) ,class:"heart-btn" ,method: :post ,remote: true do
+                        = icon("fa","heart")
+                      .heart-count.ml-3
+                        =post.likes.count
+              -else
+                %button.btn.btn
+                  .d-flex.form-inline.justify-content-center
+                    = link_to post_likes_path(post) ,class:"heart-btn" ,method: :post ,remote: true do
+                      = icon("fa","heart")
+                    .heart-count.ml-3
+                      =post.likes.count
+              %button.btn.btn
+                = link_to post_path(post),class:"card-btn" do
+                  = icon("fa","info-circle")

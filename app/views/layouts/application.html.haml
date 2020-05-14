@@ -1,0 +1,60 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Waiwai
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    .nav.navbar.navbar.bg-light.border-bottom
+      .navbar-brand
+        = link_to posts_path do
+          %button.btn.btn-outline-success
+            = icon("fa","home",class: "home-btn")
+            waiwai
+            
+      .nav-item
+        - if user_signed_in?
+          = link_to edit_user_registration_path do
+            %button.btn.btn-outline-success
+              = icon("fa","user",class: "user-btn")
+              = current_user.name
+
+      .nav-item
+        - if user_signed_in?
+          = link_to user_path(current_user) do
+            %button.btn.btn-outline-success
+              = icon("fa","list-ol",class: "list-ol-btn")
+              my-page
+      
+      .nav-item.col-3
+      -# 空白用
+
+      -if user_signed_in?
+        .logout.ml-2
+          = link_to destroy_user_session_path, method: :delete do
+            .logout
+              logout
+
+      -else
+        %button.btn.btn-outline-success
+          = link_to new_user_session_path do
+            .user-btn
+              login
+        %button.btn.btn-outline-success
+          = link_to new_user_registration_path do
+            .user-btn
+              new-user
+
+      %form.form-inline
+        %input.form-control.mr-sm-2{type:"serach",placeholder:"please input..."}
+        %button.btn.btn-outline-success
+          = icon("fas" , "search",class: "search-btn")
+
+  .container.col-12
+    -if flash.notice.present?
+      .alert.alert-success
+        = flash.notice
+    = yield

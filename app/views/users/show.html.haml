@@ -1,0 +1,42 @@
+%head
+.container.col-10.mt-4
+  %table.table
+    %thead.thead.bg-success.text-white
+      %tr
+        %th
+          No.
+        %th
+          store name
+        %th
+          review
+        %th
+          score
+        %th
+          post time
+        %th
+          .col-1
+    %tbody
+    -@posts.each.with_index do |post,index|
+      %tr
+        %th
+          = index+1
+        %th
+          = post.name
+          %td
+            = post.review
+          %td
+            = post.score
+          %td
+            = post.created_at.strftime("%Y/%-m/%-d/ %a")
+          %td
+            .btn-group
+              %button.btn.btn-success
+                = link_to post_path(post) do
+                  =icon("fa","info-circle",class:"card-btn")
+              %button.btn.btn-success
+                = link_to edit_post_path(post) do
+                  =icon("fa","edit",class:"card-btn")
+              %button.btn.btn-success
+                = link_to post_path(post),method: :delete ,data: {confirm: "「#{post.name}」を削除していいですか ?"} do
+                  =icon("fa","trash-alt",class:"card-btn")
+

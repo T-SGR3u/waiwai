@@ -1,0 +1,90 @@
+body {
+  background-color:#faf0e6;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.nav-link {
+  color: black;
+  text-decoration: none;
+  }
+  
+.nav-link:hover {
+color: gray;
+}
+
+.card-btn {
+  color: black;
+}
+
+.already-heart-btn {
+  text-decoration: none;
+  color:red;
+}
+
+.already-heart-btn:hover {
+  color:gray;
+}
+
+.heart-btn {
+  text-decoration: none;
+  color: #fff;
+}
+
+.heart-btn:hover {
+  color:gray;
+}
+
+.card-btn:hover {
+  text-decoration: none;
+}
+
+.fcBL {
+  color: black;
+}
+
+.fcPI {
+  color :pink;
+}
+
+.logout {
+  color:black ;
+}
+
+.logout:hover {
+  color:gray ;
+}
+
+.user-name {
+  color: white;
+}
+
+.user-name :hover{
+  color: black;
+}
+
+.no-image-message {
+  height: 140px;
+  line-height: 140px;
+}
+
+.card {
+  height: 350px;
+}
+
+.card-body {
+  overflow: scroll;
+}
+
+.new-post-btn {
+  color: white;
+}
+
+.user-name {
+  margin:90px 0 0 140px;
+}
+
+
+
