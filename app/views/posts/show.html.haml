@@ -32,16 +32,17 @@
         .review-content
           = auto_link(@post.link)
 
-    .container.text-right
-      .btn-group
-        .edit.mr-2
-          %button.btn.btn-outline-success
-            = link_to edit_post_path,class:"edit-btn" do
-              Edit
-        .delete.ml-2
-          %button.btn.btn-outline-danger
-            = link_to post_path,method: :delete ,data: {confirm: "「#{@post.name}」を削除していいですか ?"} do
-              Delete
+    -if user_signed_in? && @post.user_id == current_user.id
+      .container.text-right
+        .btn-group
+          .edit.mr-2
+            %button.btn.btn-outline-success
+              = link_to edit_post_path,class:"edit-btn" do
+                Edit
+          .delete.ml-2
+            %button.btn.btn-outline-danger
+              = link_to post_path,method: :delete ,data: {confirm: "「#{@post.name}」を削除していいですか ?"} do
+                Delete
 
 
 
