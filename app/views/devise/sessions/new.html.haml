@@ -1,21 +1,23 @@
-%h2 Log in
-= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  .field
-    = f.label :name
-    %br/
-    = f.text_field :name, autofocus: true, autocomplete: "name"
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
-    = f.label :password
-    %br/
-    = f.password_field :password, autocomplete: "current-password"
-  - if devise_mapping.rememberable?
-    .field
-      = f.check_box :remember_me
-      = f.label :remember_me
-  .actions
-    = f.submit "Log in"
-= render "devise/shared/links"
+.container.col-4.text-center.bg-light.mt-4
+  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+    -# .field
+    -#   = f.label :name
+    -#   %br/
+    -#   = f.text_field :name, autofocus: true, autocomplete: "name"
+    .form-title
+      LOGIN
+    .field.mt-4
+      = f.label :email,class:"label"
+      %br/
+      = f.email_field :email, autofocus: true, autocomplete: "email",placeholder: "(例) waiwai@com",class:"form-control col-12"
+    .field.mt-4
+      = f.label :password,class:"label"
+      %br/
+      = f.password_field :password, autocomplete: "current-password",placeholder: "パスワードを入力してください",class:"form-control col-12"
+    - if devise_mapping.rememberable?
+      .field.mt-4
+        = f.check_box :remember_me
+        = f.label :次回から入力を省略
+    .actions.mt-4
+      = f.submit "Log in",class:"btn btn-success col-12"
+  = render "devise/shared/links"
