@@ -5,6 +5,11 @@ class PostsController < ApplicationController
   def index
     @posts = Post.includes(:user)
     @like = Like.new
+    @hash = Gmaps4rails.build_markers(@posts) do |post, marker|
+      marker.lat post.latitude
+      marker.lng post.longitude
+      marker.infowindow render_to_string(partial: "posts/infowindow", locals: { post: post })
+    end
   end
 
   def new
@@ -43,6 +48,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:name,:review,:score,:image,:link).merge(user_id: current_user.id)
+    params.require(:post).permit(:name,:review,:score,:image,:link,:address,:latitude,:longitude).merge(user_id: current_user.id)
   end
 end

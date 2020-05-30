@@ -92,8 +92,10 @@ GEM
     ffi (1.12.2)
     font-awesome-sass (5.12.0)
       sassc (>= 1.11)
+    geocoder (1.6.3)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    gmaps4rails (2.1.2)
     haml (5.1.2)
       temple (>= 0.8.0)
       tilt
@@ -256,6 +258,8 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise
   font-awesome-sass
+  geocoder
+  gmaps4rails
   haml-rails
   jbuilder (~> 2.5)
   jquery-rails
