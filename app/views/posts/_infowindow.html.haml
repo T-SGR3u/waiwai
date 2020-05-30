@@ -1,0 +1,4 @@
+%h6
+  = link_to post.name, post_path(post)
+= post.review
+= link_to "Go Map!" ,"https://maps.google.co.jp/maps?q=loc:#{post.latitude},#{post.longitude}&iwloc=J",target: "_blank"
