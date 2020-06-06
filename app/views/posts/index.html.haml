@@ -41,29 +41,8 @@
                   = post.score
 
             .btn-group.bg-success
-              .card-btn
-              -if user_signed_in?
-                -if current_user.already_liked?(post)
-                  %button.btn.btn
-                    .d-flex.form-inline.justify-content-center
-                      = link_to post_like_path(post,post.id),class:"already-heart-btn" ,method: :delete ,remote: true do
-                        =icon("fa","heart")
-                      .heart-count.ml-3
-                        =post.likes.count
-                -else
-                  %button.btn.btn
-                    .d-flex.form-inline.justify-content-center
-                      = link_to post_likes_path(post) ,class:"heart-btn" ,method: :post ,remote: true do
-                        = icon("fa","heart")
-                      .heart-count.ml-3
-                        =post.likes.count
-              -else
-                %button.btn.btn
-                  .d-flex.form-inline.justify-content-center
-                    = link_to post_likes_path(post) ,class:"heart-btn" ,method: :post ,remote: true do
-                      = icon("fa","heart")
-                    .heart-count.ml-3
-                      =post.likes.count
+              .card-btn{id:"likes_buttons_#{post.id}"}
+                = render partial: "likes/like", locals: {post: post}
               %button.btn.btn
                 = link_to post_path(post),class:"card-btn" do
                   = icon("fa","info-circle")
@@ -88,5 +67,5 @@
     handler.bounds.extendWith(markers);
     handler.fitMapToBounds();
     handler.getMap().setCenter(new google.maps.LatLng(34.68639, 135.52));
-    handler.getMap().setZoom(7);
+    handler.getMap().setZoom(8);
   });

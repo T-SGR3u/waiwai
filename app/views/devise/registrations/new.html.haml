@@ -15,11 +15,11 @@
       = f.label :password,class:"label"
       - if @minimum_password_length
         %em
-          (#{@minimum_password_length} characters minimum)
+          (#{@minimum_password_length}  文字以上)
       %br/
       = f.password_field :password, autocomplete: "new-password",placeholder: "パスワードを入力してください",class:"form-control col-12"
     .field.mt-4
-      = f.label :password_confirmation,"Password（確認)",class:"label"
+      = f.label :password_confirmation,class:"label"
       %br/
       = f.password_field :password_confirmation, autocomplete: "new-password",placeholder: "パスワードを入力してください（確認用）",class:"form-control col-12"
     .actions.mt-4

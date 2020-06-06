@@ -17,9 +17,9 @@ class PostsController < ApplicationController
   end
 
   def create
-    post = Post.new(post_params)
-    if post.save
-      redirect_to posts_url,notice: "Posted a 「#{post.name}」!"
+    @post = Post.new(post_params)
+    if @post.save
+      redirect_to posts_url,notice: "Posted a 「#{@post.name}」!"
     else
       render :new
     end
@@ -42,7 +42,7 @@ class PostsController < ApplicationController
   def destroy
     post = Post.find(params[:id])
     post.destroy
-    redirect_to posts_url, notice:"Delete a 「#{post.name}」!"
+    redirect_to posts_path, notice:"Delete a 「#{post.name}」!"
   end
 
   private
