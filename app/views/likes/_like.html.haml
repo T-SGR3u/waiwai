@@ -1,0 +1,22 @@
+-if user_signed_in?
+  -if current_user.already_liked?(post)
+    %button.btn.btn
+      .d-flex.form-inline.justify-content-center
+        = link_to post_like_path(post,post.id),class:"already-heart-btn ml-4" ,method: :delete ,remote: true do
+          =icon("fa","heart")
+        .heart-count.ml-3
+          =post.likes.count
+  -else
+    %button.btn.btn
+      .d-flex.form-inline.justify-content-center
+        = link_to post_likes_path(post) ,class:"heart-btn ml-4" ,method: :post ,remote: true do
+          = icon("fa","heart")
+        .heart-count.ml-3
+          =post.likes.count
+-else
+  %button.btn.btn
+    .d-flex.form-inline.justify-content-center
+      = link_to post_likes_path(post) ,class:"heart-btn ml-4" ,method: :post ,remote: true do
+        = icon("fa","heart")
+      .heart-count.ml-3
+        =post.likes.count
