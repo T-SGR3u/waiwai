@@ -1,13 +1,14 @@
-%h2.container.col-10.text-center.text-danger.mt-3
-  -if post.errors.any?
-    %ul#error_explanation
-      -post.errors.full_messages.each do |message|
-        %li= message
 .container.col-5.bg-light.mt-5
   .form-title.text-center
     New Post
   = form_with model: @post, local: true do |f|
     .form.mt-4
+    %h5.container.col-10.text-center.text-danger.mt-3
+      -if post.errors.any?
+        %ul#error_explanation
+          -post.errors.full_messages.each do |message|
+            %li= message
+
       .form-group.mr-5.col-12.text-center
         %h4.text-success.mt-3
           = f.label :name,"Store Name"
