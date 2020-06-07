@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index,:show]
 
   def index
-    @posts = Post.includes(:user).page(params[:page]).per(4)
+    @posts = Post.includes(:user).page(params[:page]).per(2).order(created_at: :desc)
     @like = Like.new
     @hash = Gmaps4rails.build_markers(@posts) do |post, marker|
       marker.lat post.latitude

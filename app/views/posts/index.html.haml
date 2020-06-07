@@ -32,9 +32,10 @@
                 = post.name
               .review
                 = post.review
-            .heart-count
-            .d-flex.justify-content-end
-              .form-inline.mr-3
+            .d-flex.justify-content-center
+              .post_day.mr-5.mt-3
+                = l post.created_at,format: :short
+              .form-inline.mr-3.mt-1
                 .score-icon.text-warning.mr-2
                   =icon("fa","star",class:"score-icon")
                 %h4.mt-2.user-score
