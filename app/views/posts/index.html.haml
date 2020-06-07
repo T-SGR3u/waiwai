@@ -46,6 +46,11 @@
               %button.btn.btn
                 = link_to post_path(post),class:"card-btn" do
                   = icon("fa","info-circle")
+.container.fluid
+  .pagination.mt-5.justify-content-center
+    = paginate @posts
+  .pagination.justify-content-center
+    = page_entries_info @posts
 -#Google map-----------------------------------------------------------------
 .container.d-flex.justify-content-center.mt-5
   %h1.display-5.title
