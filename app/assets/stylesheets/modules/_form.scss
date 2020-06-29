@@ -1,3 +1,45 @@
-ul {
-  list-style: none;
+.container {
+  ul {
+    list-style: none;
+  }
+  .image-class {
+    // width: 80%;
+    // height: 250px;
+    // background-color:#dcdcdc;
+    // margin: 0 auto;
+    // border-style: dotted ;
+    // margin-bottom: 20px;
+    text-align: center;
+    // line-height: 300px;
+    .image-btn {
+      background-image: image-url("image-btn.png");
+      background-size: cover;
+      width:40px;
+      height: 40px;
+      transition: .3s;
+      cursor: pointer;
+    }
+    .image-btn:hover {
+      -webkit-transform: translateY(-10px);
+      transform: translateY(-10px);
+    }
+  }
+  .form-control {
+    color: blue;
+  }
+  .form-control-file {
+    display: none;
+  }
+  .image-preview {
+    text-align: center;
+    img {
+      margin-top: 10px;
+      margin-bottom: 15px;
+      border: dashed 2px pink;/*点線*/
+      height: 250px;
+      width: 80%;
+
+    }  
+  }
+
 }

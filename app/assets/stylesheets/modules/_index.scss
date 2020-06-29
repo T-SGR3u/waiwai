@@ -86,36 +86,6 @@ color: gray;
   margin:90px 0 0 140px;
 }
 
-.image-class {
-  width: 80%;
-  height: 250px;
-  background-color:#dcdcdc;
-  margin: 0 auto;
-  border-style: dotted ;
-  margin-bottom: 20px;
-  text-align: center;
-  line-height: 300px;
-  .image-btn {
-    background-image: image-url("image-btn.png");
-    background-size: cover;
-    width:60px;
-    height: 60px;
-    transition: .3s;
-    cursor: pointer;
-  }
-  .image-btn:hover {
-    -webkit-transform: translateY(-10px);
-    transform: translateY(-10px);
-  }
-  
-}
 
-.form-control {
-  color: blue;
-}
-
-.form-control-file {
-  display: none;
-}
 
 

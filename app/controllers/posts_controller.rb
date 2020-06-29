@@ -14,6 +14,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @post.images.new
   end
 
   def create
@@ -34,9 +35,12 @@ class PostsController < ApplicationController
   end
 
   def update
-    post = Post.find(params[:id])
-    post.update(post_params)
-    redirect_to posts_url, notice:"Updated a 「#{post.name}」!"
+    @post = Post.find(params[:id])
+    if @post.update(post_params)
+      redirect_to posts_url, notice:"Updated a 「#{@post.name}」!"
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -48,6 +52,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:name,:review,:score,:image,:link,:address,:latitude,:longitude).merge(user_id: current_user.id)
+    params.require(:post).permit(:name,:review,:score,:link,:address,:latitude,:longitude,images_attributes: [:src]).merge(user_id: current_user.id)
   end
 end
