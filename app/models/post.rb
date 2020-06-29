@@ -1,8 +1,10 @@
 class Post < ApplicationRecord
 
-  has_one_attached :image
-  validate :image_presence
+  # validate :image_presence
   belongs_to :user
+  # mount_uploader :image, ImageUploader
+  has_many :images
+  accepts_nested_attributes_for :images, allow_destroy: true
 
   validates :name, :address, :score, presence: true
   has_many :likes, dependent: :destroy
@@ -11,10 +13,10 @@ class Post < ApplicationRecord
   geocoded_by :address
   after_validation :geocode
 
-  def image_presence
-    unless image.attached?
-      errors.add(:image ,"を添付してください")
-    end
-  end
+  # def image_presence
+  #   unless image.attached?
+  #     errors.add(:image ,"を添付してください")
+  #   end
+  # end
 
 end

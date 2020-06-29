@@ -36,9 +36,17 @@
           = f.label :Link
           = f.url_field :link,class:"form-control text-center",placeholder:"URLを貼り付けてください"
    
-    .image-class
-      %label.image-btn
-        = f.file_field :image, class:"form-control-file"
+    -# .image-class
+    -#   %p 画像を貼り付けてください（最大６枚まで）
+    -#   %label.image-btn
+    -#     = f.file_field :image , class:"form-control-file"
+    .image-preview
+    #image-box
+      = f.fields_for :images do |image|
+        %div{data: {index: "image.index"} ,class:"js-file_group"}
+          = image.file_field :src, class: "js-file"
+          %span{class: "js-remove"}
+            削除
 
     .form-group.text-center
       .action

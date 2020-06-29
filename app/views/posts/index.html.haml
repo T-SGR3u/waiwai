@@ -19,11 +19,7 @@
         .col
           .card.mt-4.ml-6{style:"width:15rem"}
             %img.card-img-top
-              -if post.image.attached?
-                = image_tag post.image, height: '140px', width: '100%'
-              -else
-                .no-image-message.text-center.bg-secondary
-                  No image
+              = image_tag post.images.first.src.url
             %h5.card-img-overlay
               .user-name.text-center.rounded.bg-dark.text-white{style:"width:4rem"}
                 = post.user.name
@@ -52,6 +48,7 @@
     = paginate @posts
   .pagination.justify-content-center
     = page_entries_info @posts
+
 -#Google map-----------------------------------------------------------------
 .container.d-flex.justify-content-center.mt-5
   %h1.display-5.title

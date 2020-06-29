@@ -2,11 +2,14 @@
   .container.fluid.col-5.mt-4
     .card-group
       .card-img-top
-        -if @post.image.attached?
-          = image_tag @post.image, alt: 'store-image', height: '350px', width: '100%', class: 'store-img-show'
-        -else
-          .no-image-message.text-center.bg-secondary
-            = image_alt('No image')
+        - @post.images.each do |image|
+          = image_tag image.src.url,height: '350px', width: '100%'
+
+        -# -if @post.image.attached?
+        -#   = image_tag @post.image, alt: 'store-image', height: '350px', width: '100%', class: 'store-img-show'
+        -# -else
+        -#   .no-image-message.text-center.bg-secondary
+        -#     = image_alt('No image')
       %h3.card-img-overlay.text-white.ml-2
         =@post.user.name
 
