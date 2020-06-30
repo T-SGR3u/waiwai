@@ -1,4 +1,4 @@
-.container.col-5.bg-light.mt-5
+.container.col-9.bg-light.mt-5
   .form-title.text-center
     New Post
   = form_with model: @post, local: true do |f|
@@ -25,29 +25,52 @@
             = f.label :score,"Score"
             = f.text_field :score,class:"form-control text-center",type:"number",step:"0.1",max:"5",placeholder:"0.1〜5.0を入力してください"
 
-    .form.mt-3.text-center
-      .form-group.col-12
-        %h4.text-success
-          = f.label :rview
-          = f.text_area :review ,class:"form-control text-center",placeholder:"評価・感想を入力してください",rows:"3"
+      .form.mt-3.text-center
+        .form-group.col-12
+          %h4.text-success
+            = f.label :rview
+            = f.text_area :review ,class:"form-control text-center",placeholder:"評価・感想を入力してください",rows:"3"
 
       .form-group.col-12.text-center
         %h4.text-success
           = f.label :Link
           = f.url_field :link,class:"form-control text-center",placeholder:"URLを貼り付けてください"
    
-    -# .image-class
-    -#   %p 画像を貼り付けてください（最大６枚まで）
-    -#   %label.image-btn
-    -#     = f.file_field :image , class:"form-control-file"
-    .image-preview
-    #image-box
-      = f.fields_for :images do |image|
-        %div{data: {index: "image.index"} ,class:"js-file_group"}
-          = image.file_field :src, class: "js-file"
-          %span{class: "js-remove"}
-            削除
+      .image-group
+        %h4.text-success
+          = f.label :Image
+          .image-attention
+            最大4枚までアップロードできます
+          .image-container
+            .prev-content
+            .label-content
+              %label{for: "post_images_attributes_0_image", class: "label-box", id: "label-box--0"}
+                %pre.image-btn
 
+            .hidden-content
+              = f.fields_for :images do |i|
+                = i.file_field :image, class: "hidden-field"
+                %input{class:"hidden-field", type: "file", name: "post[images_attributes][1][image]", id: "post_images_attributes_1_image" }
+                %input{class:"hidden-field", type: "file", name: "post[images_attributes][2][image]", id: "post_images_attributes_2_image" }
+                %input{class:"hidden-field", type: "file", name: "post[images_attributes][3][image]", id: "post_images_attributes_3_image" }
+    -# .image-preview
+    -#   #image-box
+    -#     #previews
+    -#       -if @post.persisted?
+    -#         -@post.images.each_with_index do |image, i|
+    -#           = image_tag image.src.url, data: {index: i}, width: "100%", height: '300'
+    -#     = f.fields_for :images do |image|
+    -#       %div{data: {index: "image.index"} ,class:"js-file_group"}
+    -#         = image.file_field :src, class: "js-file"
+    -#         %span{class: "js-remove"}
+    -#           削除
+    -#         -if @post.persisted?
+    -#           = image.check_box :_destroy, data: {index: image.index}, class: "hidden-destroy"
+    -#         -if @post.persisted?
+    -#           %div{data: {index: "@post.images.count"},class:"js-file_group"}
+    -#             = file_field_tag :src, name: "post[images_attributes][#{@post.images.count}][src]", class: "js-file"
+    -#             %div{class:"js-remove"}
+    -#               削除
     .form-group.text-center
       .action
-        = f.submit :send, class:"btn btn-success  col-10 mb-4"
+        = f.submit :send, class:"btn btn-success  col-4 mb-4"

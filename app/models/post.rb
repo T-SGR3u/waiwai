@@ -3,7 +3,7 @@ class Post < ApplicationRecord
   # validate :image_presence
   belongs_to :user
   # mount_uploader :image, ImageUploader
-  has_many :images
+  has_many :images ,dependent: :destroy
   accepts_nested_attributes_for :images, allow_destroy: true
 
   validates :name, :address, :score, presence: true
