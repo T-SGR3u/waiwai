@@ -14,7 +14,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
-    @post.images.new
+    @images = @post.images.new
   end
 
   def create
@@ -28,6 +28,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @images = @post.images
   end
 
   def edit
@@ -52,6 +53,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:name,:review,:score,:link,:address,:latitude,:longitude,images_attributes: [:src, :_destroy, :id]).merge(user_id: current_user.id)
+    params.require(:post).permit(:name,:review,:score,:link,:address,:latitude,:longitude,images_attributes: [:image, :_destroy, :id]).merge(user_id: current_user.id)
   end
 end

@@ -19,7 +19,7 @@
         .col
           .card.mt-4.ml-6{style:"width:15rem"}
             %img.card-img-top
-              = image_tag post.images.first.src.url
+              = image_tag post.images.first.image.to_s
             %h5.card-img-overlay
               .user-name.text-center.rounded.bg-dark.text-white{style:"width:4rem"}
                 = post.user.name

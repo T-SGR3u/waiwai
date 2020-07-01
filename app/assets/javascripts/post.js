@@ -1,6 +1,3 @@
-// 
-
-
 $(document).on("turbolinks:load", function(){
   $(function(){
 
@@ -10,8 +7,8 @@ $(document).on("turbolinks:load", function(){
                     <div class="upper-box">
                       <img src="" alt="preview">
                     </div>
-                    <div class="lower-box">
-                      <div class="delete-box" id="delete_btn_${count}">
+                    <div class="lower-box mt-2">
+                      <div class="delete-box btn btn-dark" id="delete_btn_${count}">
                         <span>削除</span>
                       </div>
                     </div>
@@ -23,8 +20,8 @@ $(document).on("turbolinks:load", function(){
     function setLabel() {
       //プレビューボックスのwidthを取得し、maxから引くことでラベルのwidthを決定
       var prevContent = $('.label-content').prev();
-      labelWidth = (100% - $(prevContent).css('width').replace(/[^0-9]/g, ''));
-      $('.label-content').css('width', labelWidth);
+      // labelWidth = (100% - $(prevContent).css('width').replace(/[^0-9]/g, ''));
+      // $('.label-content').css('width', labelWidth);
     }
     // プレビューの追加
     $(document).on('change', '.hidden-field', function() {
