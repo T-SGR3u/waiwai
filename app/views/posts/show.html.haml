@@ -2,9 +2,8 @@
   .container.fluid.col-5.mt-4
     .card-group
       .card-img-top
-        - @post.images.each do |image|
-          = image_tag image.src.url,height: '350px', width: '100%'
-
+        - @images.each do |i|
+          = image_tag i.image.to_s, class: "show-img"
         -# -if @post.image.attached?
         -#   = image_tag @post.image, alt: 'store-image', height: '350px', width: '100%', class: 'store-img-show'
         -# -else
