@@ -16,6 +16,27 @@ $(document).on("turbolinks:load", function(){
       return html;
     }
 
+    // 投稿編集時
+    // posts/:i/editページへリンクした際のリアクション
+    if (window.location.href.match(/\/posts\/\d+\/edit/)){
+      // 登録済み画像のプレビュー表示欄の要素を取得する
+      var preContent = $(".label-content").prev();
+      // プレビューにidを追加
+      $(".preview-box").each(function(index, box){
+        $(box).attr("id",`preview-box__${index}`);
+      })
+      // 削除ボタンにidを追加
+      $(".delete-box").each(function(index, box){
+        $(box).attr("id", `delete_btn_${index}`);
+      })
+      var count = $(".preview-box").length;
+      // プレビューが4つあるときは、投稿ボックスを消しておく
+      if (count == 4) {
+        $(".label-content").hide();
+      }
+    }
+
+
     // ラベルのwidth操作
     function setLabel() {
       //プレビューボックスのwidthを取得し、maxから引くことでラベルのwidthを決定
@@ -72,21 +93,41 @@ $(document).on("turbolinks:load", function(){
       var id = $(this).attr('id').replace(/[^0-9]/g, '');
       //取得したidに該当するプレビューを削除
       $(`#preview-box__${id}`).remove();
-      console.log("new")
+
+      // newとeditの場合分け====================================
+
+      // new
+      // 削除用チェックボックスの有無で判定
+      if ($(`#post_images_attributes_${id}__destroy`).length == 0){
       //フォームの中身を削除 
-      $(`#post_images_attributes_${id}_image`).val("");
+        $(`#post_images_attributes_${id}_image`).val("");
 
-      //削除時のラベル操作
-      var count = $('.preview-box').length;
-      //4個めが消されたらラベルを表示
-      if (count == 3) {
-        $('.label-content').show();
+        //削除時のラベル操作
+        var count = $('.preview-box').length;
+        //4個めが消されたらラベルを表示
+        if (count == 3) {
+          $('.label-content').show();
+        }
+        setLabel(count);
+        if(id < 4){
+          //削除された際に、空っぽになったfile_fieldをもう一度入力可能にする
+          $('.label-box').attr({id: `label-box--${id}`,for: `post_images_attributes_${id}_image`});
+        }
       }
-      setLabel(count);
 
-      if(id < 4){
-        //削除された際に、空っぽになったfile_fieldをもう一度入力可能にする
-        $('.label-box').attr({id: `label-box--${id}`,for: `post_images_attributes_${id}_image`});
+      else {
+        
+        // edit
+        $(`#post_images_attributes_${id}__destroy`).prop("checked", true);
+        // 4個めが消されたらラベルを表示
+        if (count == 3) {
+          $(".label-content").show();
+        }
+        setLabel(count);
+        if(id < 4){
+          //削除された際に、空っぽになったfile_fieldをもう一度入力可能にする
+          $('.label-box').attr({id: `label-box--${id}`,for: `post_images_attributes_${id}_image`});
+        }
       }
     });
   });
