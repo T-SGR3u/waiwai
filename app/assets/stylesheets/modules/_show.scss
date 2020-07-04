@@ -1,4 +1,35 @@
-.show-img {
-  width: 300px;
-  height: 200px;
+body {
+  .show-image-container {
+    height: 300px;
+    padding: 0;
+    .list-group-flush{
+      .list-group-item{
+        .show-img {
+          width: 270px;
+          height: 150px;
+          margin-top: 5px;
+        }
+      }
+    }
+    .show-gmap{
+      margin-top: 10px;
+      padding-right: 17px;
+    }
+  }
+
+  .comment-container {
+    .list-group-item {
+      .comment-box {
+        height: 250px;
+        overflow: scroll;
+        .comment-group{
+          border-bottom: solid;
+          border-bottom-color:#f0f8ff;
+          .comment-created {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  }
 }

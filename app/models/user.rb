@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :posts ,dependent: :destroy
   has_many :likes ,dependent: :destroy
   has_many :liked_posts ,through: :likes, source: :post
+  has_many :comments
 
   validates :name, presence: true
   validates :email, presence: true

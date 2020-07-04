@@ -1,50 +1,111 @@
 %body
-  .container.fluid.col-5.mt-4
-    .card-group
-      .card-img-top
-        - @images.each do |i|
-          = image_tag i.image.to_s, class: "show-img"
-        -# -if @post.image.attached?
-        -#   = image_tag @post.image, alt: 'store-image', height: '350px', width: '100%', class: 'store-img-show'
-        -# -else
-        -#   .no-image-message.text-center.bg-secondary
-        -#     = image_alt('No image')
-      %h3.card-img-overlay.text-white.ml-2
-        =@post.user.name
+  .d-flex
+    .show-image-container.col-5.mt-2
+      .list-group-flush
+        .list-group-item.mb-2
+          %h4 Photo
+          - @images.each do |i|
+            = image_tag i.image.to_s, class: "show-img"
+      .list-group-flush
+        .list-group-item.mb-2
+          .show-gmap.img-fluid
+            %h4 Access
+            %div{:style => "width: 100%;"}
+              #map{:style => "width: 100%; height: 250px;"}
+          :javascript
+            handler = Gmaps.build('Google');
+            handler.buildMap({
+              provider: {mapTypeId: 'roadmap'}, 
+              internal: {id: 'map'}
+              },
+              function(){
+                markers = handler.addMarkers(#{raw @hash.to_json});
+                handler.bounds.extendWith(markers);
+                handler.fitMapToBounds();
+                handler.getMap().setZoom(16);
+              });
 
-    .list-group-flush
-      .list-group-item
-        %h4 Store name
-        %h4.store-name
-          = @post.name
-    .list-group-flush
-      .list-group-item
-        %h5 Review
-        .review-content
-          = @post.review
-    .list-group-flush
-      .list-group-item
-        .d-flex
-          %h5.mr-4.mt-1 Score
-          %h5.mt-1.score-content
-            = @post.score
-    .list-group-flush
-      .list-group-item
-        %h5 URL
-        .review-content
-          = auto_link(@post.link)
 
-    -if user_signed_in? && @post.user_id == current_user.id
-      .container.text-right
-        .btn-group
-          .edit.mr-2
-            %button.btn.btn-outline-success
-              = link_to edit_post_path,class:"edit-btn" do
-                Edit
-          .delete.ml-2
-            %button.btn.btn-outline-danger
-              = link_to post_path,method: :delete ,data: {confirm: "「#{@post.name}」を削除していいですか ?"} do
-                Delete
+    .info-container.col-4.mt-2
+      .list-group-flush
+        .list-group-item
+          %h4 User
+          %h4.store-name
+            = @post.user.name
+      .list-group-flush
+        .list-group-item
+          %h4 Store name
+          %h4.store-name
+            = @post.name
+      .list-group-flush
+        .list-group-item
+          %h4 Address
+          %h4.store-name
+            = @post.address
+      .list-group-flush
+        .list-group-item
+          %h5 Review
+          .review-content
+            = @post.review
+      .list-group-flush
+        .list-group-item
+          .d-flex
+            %h5.mr-4.mt-1 Score
+            %h5.mt-1.score-content
+              = @post.score
+      .list-group-flush
+        .list-group-item
+          %h5 URL
+          .review-content
+            = auto_link(@post.link)
+      .list-group-flush
+        .list-group-item
+          -if user_signed_in? && @post.user_id == current_user.id
+            .edit
+              %button.btn.btn-success.col-12
+                = link_to edit_post_path,class:"edit-btn text-white" do
+                  Edit
+            .delete
+              %button.btn.btn-danger.col-12.mt-3
+                = link_to post_path,method: :delete ,class:"delete-btn text-white",data: {confirm: "「#{@post.name}」を削除していいですか ?"} do
+                  Delete
+  
+    .comment-container.col-3
+      -if @comments.present?
+        .list-group-flush.mt-2
+          .list-group-item
+            .form-title
+              %h4 Comment List
+              %h5.comment-count.d-flex
+                = @comments.count
+                post
+              
+            .comment-box
+              - @comments.each do |comment|
+                .comment-group.mt-1
+                  .user-comment-box.d-flex
+                    .comment-user.text-info
+                      =comment.user.name
+                    .colon.ml-2 :
+                    .comment-text.ml-4
+                      =comment.text
+                  .comment-created.text-right.text-muted
+                    =comment.created_at.strftime('%y/%-m/%-d (%a) %H:%M')
+
+      .list-group-flush.mt-2
+        .list-group-item
+          %h4 Comment
+          -if current_user
+            = form_with model:[@post, @comment], local: true do |f|
+              .form.mt-3.text-center
+                .form-group.col-12
+                  %h4.text-success
+                    = f.text_area :text ,class:"form-control text-center",placeholder:"コメントを入力してください",rows:"3"
+              .form-group.text-center
+                .action
+                  = f.submit :send, class:"btn btn-success  col-11 mb-4"
+          - else
+            %h4 You must to Login! if you want to Comment! 
 
 
 
