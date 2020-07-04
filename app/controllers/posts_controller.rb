@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index,:show]
 
   def index
-    @posts = Post.includes(:user).page(params[:page]).per(2).order(created_at: :desc)
+    @posts = Post.includes(:user).page(params[:page]).per(8).order(created_at: :desc)
     @like = Like.new
     @hash = Gmaps4rails.build_markers(@posts) do |post, marker|
       marker.lat post.latitude
@@ -28,6 +28,15 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @hash = Gmaps4rails.build_markers(@post) do |post, marker|
+      marker.lat post.latitude
+      marker.lng post.longitude
+      marker.infowindow render_to_string(partial: "posts/infowindow", locals: { post: post })
+    end
+
+    @comment = Comment.new
+    @comments = @post.comments.includes(:user).order(created_at: :desc)
+
     @images = @post.images
   end
 
@@ -38,7 +47,7 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
-      redirect_to posts_url, notice:"Updated a 「#{@post.name}」!"
+      redirect_to post_path(@post), notice:"Updated a 「#{@post.name}」!"
     else
       render :edit
     end
