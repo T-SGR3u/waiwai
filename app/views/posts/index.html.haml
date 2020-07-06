@@ -12,22 +12,36 @@
   -else
     %h2.mt-2 You can post if you "Login" !
 
+.container
+  .form-group
+    = search_form_for @q do |f|
+      .form-inline.justify-content-center
+        = f.search_field :name_or_address_cont,class: " form-control col-4", placeholder:"please input..."
+        = f.submit :search, class: "btn btn-success col-1"
+        = link_to posts_path, class: "btn btn-danger col-1 ml-2" do
+          reset
+
 .container.fluid
   .card-deck
     - @posts.each do |post|
       .row
         .col
           .card.mt-4.ml-6{style:"width:15rem"}
-            %img.card-img-top
-              = image_tag post.images.first.image.to_s
-            %h5.card-img-overlay
-              .user-name.text-center.rounded.bg-dark.text-white{style:"width:4rem"}
-                = post.user.name
+            = link_to post_path(post) do
+              .card-img-top
+                = image_tag post.images.first.image.to_s, height: '100%', width: '100%'
             .card-body
               %h5.store-name
                 = post.name
               .review
                 = post.review
+              .tag
+                = render "tag_list", tag_list: post.tag_list
+            .address.ml-2
+              .address-title.mt-2
+                access
+              .address-post
+                = post.address
             .d-flex.justify-content-center
               .post_day.mr-5.mt-3
                 = post.created_at.strftime('%y/%-m/%-d (%a)')
@@ -40,9 +54,10 @@
             .btn-group.bg-success
               .card-btn{id:"likes_buttons_#{post.id}"}
                 = render partial: "likes/like", locals: {post: post}
-              %button.btn.btn
-                = link_to post_path(post),class:"card-btn" do
-                  = icon("fa","info-circle")
+              .btn.text-white
+                user : 
+                = post.user.name
+
 .container.fluid
   .pagination.mt-5.justify-content-center
     = paginate @posts

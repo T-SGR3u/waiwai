@@ -27,26 +27,37 @@
 
 
     .info-container.col-4.mt-2
+      .like-box.d-flex.justify-content-end
+        %h6.mt-2 LIKE
+        .like-box
+          .like-link{id:"likes_buttons_#{@post.id}"}
+            = render partial: "likes/like", locals: {post: @post}
+
       .list-group-flush
         .list-group-item
           %h4 User
-          %h4.store-name
+          %h5
             = @post.user.name
       .list-group-flush
         .list-group-item
           %h4 Store name
-          %h4.store-name
+          %h5
             = @post.name
       .list-group-flush
         .list-group-item
           %h4 Address
-          %h4.store-name
+          %h5
             = @post.address
       .list-group-flush
         .list-group-item
           %h5 Review
           .review-content
             = @post.review
+      .list-group-flush
+        .list-group-item
+          %h5 tag
+          %h4
+            = render "tag_list", tag_list: @post.tag_list
       .list-group-flush
         .list-group-item
           .d-flex
@@ -58,9 +69,16 @@
           %h5 URL
           .review-content
             = auto_link(@post.link)
-      .list-group-flush
-        .list-group-item
-          -if user_signed_in? && @post.user_id == current_user.id
+
+      -# .list-group-flush
+      -#   .list-group-item
+      -#     %h5 LIKE
+      -#     .btn-group
+      -#       .card-btn{id:"likes_buttons_#{@post.id}"}
+      -#         = render partial: "likes/like", locals: {post: @post}
+      -if user_signed_in? && @post.user_id == current_user.id
+        .list-group-flush
+          .list-group-item
             .edit
               %button.btn.btn-success.col-12
                 = link_to edit_post_path,class:"edit-btn text-white" do
@@ -103,9 +121,10 @@
                     = f.text_area :text ,class:"form-control text-center",placeholder:"コメントを入力してください",rows:"3"
               .form-group.text-center
                 .action
-                  = f.submit :send, class:"btn btn-success  col-11 mb-4"
+                  = f.submit :send,remote: true, class:"btn btn-success  col-11 mb-4"
           - else
-            %h4 You must to Login! if you want to Comment! 
+            %h5 You must to Login!
+            %h5 if you want to Comment! 
 
 
 

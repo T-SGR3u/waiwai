@@ -1,5 +1,12 @@
 %head
+
+-# post===============================================
 .container.col-10.mt-4
+  .title-box.d-flex.justify-content-between
+    %h2 POST
+    %h4.d-flex
+      =@posts.count
+      post
   %table.table
     %thead.thead.bg-success.text-white
       %tr
@@ -13,8 +20,8 @@
           score
         %th
           post time
-        %th
-          .col-1
+        %th.text-center
+          link
     %tbody
     -@posts.each.with_index do |post,index|
       %tr.bg-white
@@ -27,8 +34,8 @@
           %td
             = post.score
           %td
-            = post.created_at.strftime("%Y/%-m/%-d/ %a")
-          %td
+            = post.created_at.strftime('%y/%-m/%-d (%a) %H:%M')
+          %td.text-center
             .btn-group
               %button.btn.btn-success
                 = link_to post_path(post) do
@@ -38,5 +45,86 @@
                   =icon("fa","edit",class:"card-btn")
               %button.btn.btn-success
                 = link_to post_path(post),method: :delete ,data: {confirm: "「#{post.name}」を削除していいですか ?"} do
+                  =icon("fa","trash-alt",class:"card-btn")
+
+-# likes===============================================
+.container.col-10.mt-4
+  .title-box.d-flex.justify-content-between
+    %h2 LIKE
+    %h4.d-flex
+      =@likes.count
+      like
+  %table.table
+    %thead.thead.bg-warning.text-white
+      %tr
+        %th
+          No.
+        %th
+          store name
+        %th
+          review
+        %th
+          score
+        %th
+          post time
+        %th.text-center
+          link
+    %tbody
+    -@likes.each.with_index do |like,index|
+      %tr.bg-white
+        %th
+          = index+1
+        %th
+          = like.post.name
+          %td
+            = like.post.review
+          %td
+            = like.post.score
+          %td
+            = like.post.created_at.strftime('%y/%-m/%-d (%a) %H:%M')
+          %td.text-center
+            .btn-group
+              %button.btn.btn-warning
+                = link_to post_path(like.post) do
+                  =icon("fa","info-circle",class:"card-btn")
+
+-# comment===============================================
+.container.col-10.mt-4
+  .title-box.d-flex.justify-content-between
+    %h2 COMMENT
+    %h4.d-flex
+      =@comments.count
+      comment
+  %table.table
+    %thead.thead.bg-primary.text-white
+      %tr
+        %th
+          No.
+        %th
+          store name
+        %th
+          comment
+        %th
+          comment time
+        %th.text-center
+          link
+    %tbody
+    -@comments.each.with_index do |comment,index|
+      %tr.bg-white
+        %th
+          = index+1
+        %th
+          = comment.post.name
+          %td
+            = comment.text
+          %td
+            = comment.created_at.strftime('%y/%-m/%-d (%a) %H:%M')
+          %td.text-center
+            .btn-group
+              %button.btn.btn-primary
+                = link_to post_path(comment.post) do
+                  =icon("fa","info-circle",class:"card-btn")
+              %button.btn.btn-primary
+                = link_to post_comment_path(comment,comment.id),method: :delete ,data: {confirm: "「#{comment.text}」を削除していいですか ?"} do
                   =icon("fa","trash-alt",class:"card-btn")
 

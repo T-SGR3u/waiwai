@@ -71,12 +71,18 @@ color: gray;
 }
 
 .card {
-  height: 350px;
+  img.card-img-top {
+    margin-top: 0;
+  }
+  height: 400px;
+  position: relative;
+  .card-body {
+    overflow: scroll;
+    .btn-group {
+    }
+  }
 }
 
-.card-body {
-  overflow: scroll;
-}
 
 .new-post-btn {
   color: white;

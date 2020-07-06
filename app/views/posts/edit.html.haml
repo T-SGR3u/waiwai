@@ -31,6 +31,12 @@
             = f.label :rview
             = f.text_area :review ,class:"form-control text-center",placeholder:"評価・感想を入力してください",rows:"3"
 
+      .form.mt-3.text-center
+        .form-group.col-12
+          %h4.text-success
+            = f.label :Tag
+            = f.text_field :tag_list, value: @post.tag_list.join(','), class: "form-control text-center",placeholder: "例）ラーメン,豚骨  ※小文字カンマ(,)で区切ってください"
+
       .form-group.col-12.text-center
         %h4.text-success
           = f.label :Link
