@@ -50,10 +50,11 @@
             .user-btn
               new-user
 
-      %form.form-inline
-        %input.form-control.mr-sm-2{type:"serach",placeholder:"please input..."}
-        %button.btn.btn-outline-success
-          = icon("fas" , "search",class: "search-btn")
+      -# .form-group
+      -#   = search_form_for @q do |f|
+      -#     .form-inline.justify-content-center
+      -#       = f.search_field :name_or_address_cont,class: " form-control", placeholder:"please input..."
+      -#       = f.submit :search, class: "btn btn-success" 
 
   .container.col-12
     -if flash.notice.present?

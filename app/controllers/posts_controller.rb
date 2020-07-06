@@ -10,6 +10,29 @@ class PostsController < ApplicationController
       marker.lng post.longitude
       marker.infowindow render_to_string(partial: "posts/infowindow", locals: { post: post })
     end
+
+    if params[:tag_name]
+      @posts = Post.tagged_with(params[:tag_name]).page(params[:page])
+      @like = Like.new
+      @hash = Gmaps4rails.build_markers(@posts) do |post, marker|
+        marker.lat post.latitude
+        marker.lng post.longitude
+        marker.infowindow render_to_string(partial: "posts/infowindow", locals: { post: post })
+      end
+    end
+
+
+
+    if params[:q]
+      @q = Post.ransack(params[:q])
+      @posts = @q.result(distinct: true).page(params[:page])
+      @like = Like.new
+      @hash = Gmaps4rails.build_markers(@posts) do |post, marker|
+        marker.lat post.latitude
+        marker.lng post.longitude
+        marker.infowindow render_to_string(partial: "posts/infowindow", locals: { post: post })
+      end
+    end
   end
 
   def new
@@ -38,6 +61,7 @@ class PostsController < ApplicationController
     @comments = @post.comments.includes(:user).order(created_at: :desc)
 
     @images = @post.images
+
   end
 
   def edit
@@ -62,6 +86,12 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:name,:review,:score,:link,:address,:latitude,:longitude,images_attributes: [:image, :_destroy, :id]).merge(user_id: current_user.id)
+    params.require(:post).permit(:name,:review,:score,:link,:address,:latitude,:longitude,:tag_list,images_attributes: [:image, :_destroy, :id]).merge(user_id: current_user.id)
   end
+
+  # def search_action
+  #   @q = Post.ransack(params[:q])
+  #   @posts = @q.result(distinct: true).page(params[:page])
+  # end
+
 end

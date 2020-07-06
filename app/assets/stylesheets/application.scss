@@ -7,3 +7,11 @@
 @import 'modules/devise_sessions_new';
 @import 'modules/kaminari';
 
+td {
+  word-break: break-word;
+  word-wrap: normal;
+}
+
+.heart-btn {
+  color: black;
+}
