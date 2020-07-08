@@ -6,7 +6,8 @@ ja:
         name: 店舗名
         address: 住所
         score: 点数
-        image: 画像
+        images: 画像
+        tag_list: タグ
 
     errors:
       messages:
