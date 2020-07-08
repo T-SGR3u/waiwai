@@ -10,57 +10,79 @@
             %li= message
 
       .form-group.mr-5.col-12.text-center
-        %h4.text-success.mt-3
-          = f.label :name,"Store Name"
+        .text-success.mt-3.d-flex.justify-content-center
+          .label
+            = f.label :name,"Store Name"
+          .badge.badge-danger.ml-2.mt-1
+            req
+        .file
           = f.text_field :name,class:"form-control text-center",placeholder:"お店の名前を入力してください"
 
       .form-group.mr-5.col-12.text-center
-        %h4.text-success.mt-3
-          = f.label :address,"Address"
+        .text-success.mt-3.d-flex.justify-content-center
+          .label
+            = f.label :address,"Address"
+          .badge.badge-danger.ml-2.mt-1
+            req
+        .file
           = f.text_field :address,class:"form-control text-center",placeholder:"住所を入力してください"
 
       .form-group.col-12.text-center
-        .label-name.mt-3
-          %h4.mr-2.text-success
+        .text-success.mt-3.d-flex.justify-content-center
+          .label
             = f.label :score,"Score"
-            = f.text_field :score,class:"form-control text-center",type:"number",step:"0.1",max:"5",placeholder:"0.1〜5.0を入力してください"
+          .badge.badge-danger.ml-2.mt-1
+            req
+        .file
+          = f.text_field :score,class:"form-control text-center",type:"number",step:"0.1",max:"5",placeholder:"0.1〜5.0を入力してください"
 
       .form.mt-3.text-center
-        .form-group.col-12
-          %h4.text-success
+        .text-success.mt-3.d-flex.justify-content-center
+          .label
             = f.label :rview
-            = f.text_area :review ,class:"form-control text-center",placeholder:"評価・感想を入力してください",rows:"3"
+          .badge.badge-danger.ml-2.mt-1
+            req
+      .file
+        = f.text_area :review ,class:"form-control text-center",placeholder:"評価・感想を入力してください",rows:"3"
 
       .form.mt-3.text-center
-        .form-group.col-12
-          %h4.text-success
+        .text-success.mt-3.d-flex.justify-content-center
+          .label
             = f.label :Tag
-            = f.text_field :tag_list, value: @post.tag_list.join(','), class: "form-control text-center",placeholder: "例）ラーメン/豚骨  ※小文字カンマ(,)で区切ってください"
+          .badge.badge-danger.ml-2.mt-1
+            req
+          %h6.attention.text-dark.ml-4.mt-1
+            ※小文字カンマ" , "で区切ってください
+      .file
+        = f.text_field :tag_list, value: @post.tag_list.join(','), class: "form-control text-center",placeholder: "例）ラーメン,豚骨 "
 
-      .form-group.col-12.text-center
-        %h4.text-success
+      .form-group.col-12.text-center.mt-3
+        .text-success
           = f.label :Link
           = f.url_field :link,class:"form-control text-center",placeholder:"URLを貼り付けてください"
    
       .image-group.col-12
-        %h4.text-success
-          = f.label :Image
-          .image-attention
-            最大4枚までアップロードできます
-          .image-container
-            %label{for: "post_images_attributes_0_image", class: "label-box", id: "label-box--0"}
-              %pre.image-btn
-            .prev-content
-            .label-content
-              -# %label{for: "post_images_attributes_0_image", class: "label-box", id: "label-box--0"}
-              -#   %pre.image-btn
+        .text-success.mt-3.d-flex.justify-content-center
+          .label
+            = f.label :Image
+          .badge.badge-danger.ml-2.mt-1
+            req
+        .image-attention
+          最大4枚までアップロードできます
+        .image-container
+          %label{for: "post_images_attributes_0_image", class: "label-box", id: "label-box--0"}
+            %pre.image-btn
+          .prev-content
+          .label-content
+            -# %label{for: "post_images_attributes_0_image", class: "label-box", id: "label-box--0"}
+            -#   %pre.image-btn
 
-            .hidden-content
-              = f.fields_for :images do |i|
-                = i.file_field :image, class: "hidden-field"
-                %input{class:"hidden-field", type: "file", name: "post[images_attributes][1][image]", id: "post_images_attributes_1_image" }
-                %input{class:"hidden-field", type: "file", name: "post[images_attributes][2][image]", id: "post_images_attributes_2_image" }
-                %input{class:"hidden-field", type: "file", name: "post[images_attributes][3][image]", id: "post_images_attributes_3_image" }
+          .hidden-content
+            = f.fields_for :images do |i|
+              = i.file_field :image, class: "hidden-field"
+              %input{class:"hidden-field", type: "file", name: "post[images_attributes][1][image]", id: "post_images_attributes_1_image" }
+              %input{class:"hidden-field", type: "file", name: "post[images_attributes][2][image]", id: "post_images_attributes_2_image" }
+              %input{class:"hidden-field", type: "file", name: "post[images_attributes][3][image]", id: "post_images_attributes_3_image" }
     .form-group.text-center
       .action
         = f.submit :send, class:"btn btn-success  col-4 mb-4"
