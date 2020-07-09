@@ -76,3 +76,5 @@ gem 'mini_magick'
 gem 'carrierwave'
 gem 'acts-as-taggable-on', '~> 6.0'
 gem 'ransack'
+gem "gon"
+gem "dotenv-rails"
