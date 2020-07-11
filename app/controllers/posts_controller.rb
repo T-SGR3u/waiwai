@@ -5,6 +5,7 @@ class PostsController < ApplicationController
   def index
     @posts = Post.includes(:user).page(params[:page]).per(8).order(created_at: :desc)
     @like = Like.new
+
     @hash = Gmaps4rails.build_markers(@posts) do |post, marker|
       marker.lat post.latitude
       marker.lng post.longitude
@@ -14,6 +15,7 @@ class PostsController < ApplicationController
     if params[:tag_name]
       @posts = Post.tagged_with(params[:tag_name]).page(params[:page])
       @like = Like.new
+
       @hash = Gmaps4rails.build_markers(@posts) do |post, marker|
         marker.lat post.latitude
         marker.lng post.longitude
@@ -27,6 +29,7 @@ class PostsController < ApplicationController
       @q = Post.ransack(params[:q])
       @posts = @q.result(distinct: true).page(params[:page])
       @like = Like.new
+
       @hash = Gmaps4rails.build_markers(@posts) do |post, marker|
         marker.lat post.latitude
         marker.lng post.longitude
@@ -44,13 +47,14 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     if @post.save
       redirect_to posts_url,notice: "Posted a 「#{@post.name}」!"
+      
     else
       render :new
     end
   end
 
   def show
-    @post = Post.find(params[:id])
+    @post = Post.find(params[:id])    
     @hash = Gmaps4rails.build_markers(@post) do |post, marker|
       marker.lat post.latitude
       marker.lng post.longitude

@@ -78,16 +78,16 @@
 %div{:style => "width: 100%;"}
   #map{:style => "width: 100%; height: 400px;"}
 
-:javascript
-  handler = Gmaps.build('Google');
-  handler.buildMap({ 
-    provider: {mapTypeId: 'roadmap'},
-    internal: {id: 'map'}
+  :javascript
+    handler = Gmaps.build('Google');
+    handler.buildMap({ 
+      provider: {mapTypeId: 'roadmap'},
+      internal: {id: 'map'}
     }, 
-    function(){
-    markers = handler.addMarkers(#{raw @hash.to_json})
-    handler.bounds.extendWith(markers);
-    handler.fitMapToBounds();
-    handler.getMap().setCenter(new google.maps.LatLng(34.68639, 135.52));
-    handler.getMap().setZoom(8);
-  });
+      function(){
+        markers = handler.addMarkers(#{raw @hash.to_json});
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+        handler.getMap().setCenter(new google.maps.LatLng(34.68639, 135.52));
+        handler.getMap().setZoom(8);
+      });
