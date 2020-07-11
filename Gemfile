@@ -78,3 +78,4 @@ gem 'acts-as-taggable-on', '~> 6.0'
 gem 'ransack'
 gem "gon"
 gem "dotenv-rails"
+gem "fog-aws"
