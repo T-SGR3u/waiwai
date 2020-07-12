@@ -91,7 +91,7 @@
               = i.file_field :image, class: "hidden-field"
               = i.check_box:_destroy, class: "hidden-checkbox"
 
-              //5つのfile_fieldを準備するに当たって、足りない分を表示
+              //4つのfile_fieldを準備するに当たって、足りない分を表示
               -@post.images.length.upto(3) do |i|
                 %input{name: "post[images_attributes][#{i}][image]",id: "post_images_attributes_#{i}_image", class: "hidden-field",type:"file" }
     .form-group.text-center
