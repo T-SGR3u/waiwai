@@ -8,7 +8,7 @@ class Post < ApplicationRecord
 
   acts_as_taggable
 
-  validates :name, :address, :score,:tag_list, :images,  presence: true
+  validates :name, :address, :score,:tag_list, :images,:latitude, :longitude,  presence: true
   has_many :likes, dependent: :destroy
   has_many :liked_users, through: :likes, source: :user
 

@@ -8,6 +8,8 @@ ja:
         score: 点数
         images: 画像
         tag_list: タグ
+        latitude: 詳細な住所
+        longitude: 詳細な住所
 
     errors:
       messages:

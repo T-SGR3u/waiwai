@@ -5,22 +5,12 @@ class PostsController < ApplicationController
   def index
     @posts = Post.includes(:user).page(params[:page]).per(8).order(created_at: :desc)
     @like = Like.new
-
-    @hash = Gmaps4rails.build_markers(@posts) do |post, marker|
-      marker.lat post.latitude
-      marker.lng post.longitude
-      marker.infowindow render_to_string(partial: "posts/infowindow", locals: { post: post })
-    end
+    map_action
 
     if params[:tag_name]
       @posts = Post.tagged_with(params[:tag_name]).page(params[:page])
       @like = Like.new
-
-      @hash = Gmaps4rails.build_markers(@posts) do |post, marker|
-        marker.lat post.latitude
-        marker.lng post.longitude
-        marker.infowindow render_to_string(partial: "posts/infowindow", locals: { post: post })
-      end
+      map_action
     end
 
 
@@ -29,12 +19,7 @@ class PostsController < ApplicationController
       @q = Post.ransack(params[:q])
       @posts = @q.result(distinct: true).page(params[:page])
       @like = Like.new
-
-      @hash = Gmaps4rails.build_markers(@posts) do |post, marker|
-        marker.lat post.latitude
-        marker.lng post.longitude
-        marker.infowindow render_to_string(partial: "posts/infowindow", locals: { post: post })
-      end
+      map_action
     end
   end
 
@@ -47,14 +32,16 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     if @post.save
       redirect_to posts_url,notice: "Posted a 「#{@post.name}」!"
-      
+
     else
       render :new
     end
   end
 
   def show
-    @post = Post.find(params[:id])    
+    @post = Post.find(params[:id])
+    # map_action
+
     @hash = Gmaps4rails.build_markers(@post) do |post, marker|
       marker.lat post.latitude
       marker.lng post.longitude
@@ -93,9 +80,11 @@ class PostsController < ApplicationController
     params.require(:post).permit(:name,:review,:score,:link,:address,:latitude,:longitude,:tag_list,images_attributes: [:image, :_destroy, :id]).merge(user_id: current_user.id)
   end
 
-  # def search_action
-  #   @q = Post.ransack(params[:q])
-  #   @posts = @q.result(distinct: true).page(params[:page])
-  # end
-
+  def map_action
+    @hash = Gmaps4rails.build_markers(@posts) do |post, marker|
+      marker.lat post.latitude
+      marker.lng post.longitude
+      marker.infowindow render_to_string(partial: "posts/infowindow", locals: { post: post })
+    end
+  end
 end

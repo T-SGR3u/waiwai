@@ -43,7 +43,7 @@
                 = render "tag_list", tag_list: post.tag_list
             .address.ml-2
               .address-title.mt-2
-                access
+                address
               .address-post
                 = post.address
             .d-flex.justify-content-center
@@ -74,6 +74,7 @@
     MAP & SPOT
   %h4.beer-icon.ml-1
     = icon("fas fa-map-marked-alt",class: "beer-icon")
+
 
 %div{:style => "width: 100%;"}
   #map{:style => "width: 100%; height: 400px;"}

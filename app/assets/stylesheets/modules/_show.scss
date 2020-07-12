@@ -32,7 +32,7 @@ body {
   .comment-container {
     .list-group-item {
       .comment-box {
-        height: 250px;
+        max-height: 250px;
         overflow: scroll;
         .comment-group{
           border-bottom: solid;
