@@ -17,6 +17,27 @@ body {
       padding-right: 17px;
     }
   }
+
+  // モーダル風ウィンドウ
+  #bg {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0, .4);
+  }
+
+  #photo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 640px;
+    height: 420px;
+  }
  
 
   // info-container=====================
