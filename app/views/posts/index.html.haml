@@ -41,24 +41,24 @@
                 = post.review
               .tag
                 = render "tag_list", tag_list: post.tag_list
-            .address.ml-2
-              .address-title.mt-2
+            .address.ml-2.bg-light.pb-1
+              %badge.badge.bg-dark.text-white.address-title.mt-2
                 address
               .address-post
                 = post.address
             .d-flex.justify-content-center
-              .post_day.mr-5.mt-3
+              .post_day.mr-5
                 = post.created_at.strftime('%y/%-m/%-d (%a)')
-              .form-inline.mr-3.mt-1
+              .form-inline.mr-3
                 .score-icon.text-warning.mr-2
                   =icon("fa","star",class:"score-icon")
-                %h4.mt-2.user-score
+                %h6.user-score.pt-2
                   = post.score
 
             .btn-group.bg-success
               .card-btn{id:"likes_buttons_#{post.id}"}
                 = render partial: "likes/like", locals: {post: post}
-              .btn.text-white
+              .text-white.ml-4.pt-2
                 user : 
                 = post.user.name
 

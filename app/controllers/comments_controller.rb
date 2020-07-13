@@ -1,8 +1,12 @@
 class CommentsController < ApplicationController
 
   def create
-    comment = Comment.create(comment_params)
-    redirect_to post_path(comment.post.id), notice:"Create a comment!"
+    @comment = Comment.create(comment_params)
+    if @comment.save
+      redirect_to post_path(@comment.post.id), notice:"Create a comment!"
+    else
+      redirect_to post_path(@comment.post.id)
+    end
   end
 
   def destroy

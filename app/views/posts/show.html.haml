@@ -1,11 +1,12 @@
 %body
+  -# photo & map=======================================================
   .d-flex
     .show-image-container.col-5.mt-2
       .list-group-flush
         .list-group-item.mb-2
           %h4 Photo
           - @images.each do |i|
-            = image_tag i.image.to_s, class: "show-img"
+            = image_tag i.image.to_s, class: "show-img "
       .list-group-flush
         .list-group-item.mb-2
           .show-gmap.img-fluid
@@ -25,7 +26,7 @@
                 handler.getMap().setZoom(16);
               });
 
-
+    -# info-container===================================================
     .info-container.col-4.mt-2
       .like-box.d-flex.justify-content-end
         %h6.mt-2 LIKE
@@ -70,24 +71,17 @@
           .review-content
             = auto_link(@post.link)
 
-      -# .list-group-flush
-      -#   .list-group-item
-      -#     %h5 LIKE
-      -#     .btn-group
-      -#       .card-btn{id:"likes_buttons_#{@post.id}"}
-      -#         = render partial: "likes/like", locals: {post: @post}
       -if user_signed_in? && @post.user_id == current_user.id
         .list-group-flush
           .list-group-item
             .edit
-              %button.btn.btn-success.col-12
-                = link_to edit_post_path,class:"edit-btn text-white" do
-                  Edit
+              = link_to edit_post_path,class:"button btn btn-success col-12 text-white" do
+                Edit
             .delete
-              %button.btn.btn-danger.col-12.mt-3
-                = link_to post_path,method: :delete ,class:"delete-btn text-white",data: {confirm: "「#{@post.name}」を削除していいですか ?"} do
-                  Delete
-  
+              = link_to post_path,method: :delete ,class:"button btn btn-danger col-12 mt-3 text-white",data: {confirm: "「#{@post.name}」を削除していいですか ?"} do
+                Delete
+
+    -# comment-container===================================================
     .comment-container.col-3
       -if @comments.present?
         .list-group-flush.mt-2
