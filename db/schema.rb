@@ -44,10 +44,11 @@ ActiveRecord::Schema.define(version: 2020_07_04_092612) do
     t.text "link"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
     t.string "address"
     t.float "latitude"
     t.float "longitude"
+    t.integer "user_id"
+    t.index ["address"], name: "index_posts_on_address", unique: true
     t.index ["name"], name: "index_posts_on_name", unique: true
   end
 
@@ -87,8 +88,7 @@ ActiveRecord::Schema.define(version: 2020_07_04_092612) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["name"], name: "index_users_on_name", unique: true
   end
 
   add_foreign_key "images", "posts"

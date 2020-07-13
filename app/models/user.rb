@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :liked_posts ,through: :likes, source: :post
   has_many :comments
 
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
   validates :email, presence: true
 
   def already_liked?(post)
