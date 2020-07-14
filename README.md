@@ -1,5 +1,5 @@
  # WAIWAI 〜おすすめスポットの紹介アプリ〜
- ![トップページ](https://github.com/T-SGR3u/waiwai/blob/master/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202020-07-14%2022.51.53.png)
+ ![トップページ](https://github.com/T-SGR3u/waiwai/blob/master/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202020-07-15%201.13.08.png)
  
 ## Discription
 本アプリは個人がおすすめしたいスポットをカードとして簡単に投稿でき、且つGoogle Mapによりスポットの位置情報を示すことができます。
