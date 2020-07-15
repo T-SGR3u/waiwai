@@ -33,7 +33,7 @@
           .card.mt-4.ml-6{style:"width:15rem"}
             = link_to post_path(post) do
               .card-img-top
-                = image_tag post.images.first.image.to_s, height: '100%', width: '100%'
+                = image_tag post.images.first.image.to_s, height: '150', width: '240'
             .card-body
               %h5.store-name
                 = post.name
