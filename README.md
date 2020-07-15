@@ -5,14 +5,22 @@
 本アプリはおすすめしたい飲食店をカードとして簡単に投稿でき、さらに登録時の住所からGoogle Mapでお店の位置情報を示すことができます。
 気軽に投稿して、自分が好きな店を共有し合いましょう!
 
-#### ○投稿カードについて
-"NEW POST!"から投稿したカードはトップページに一覧表示されます（8枚/ページ）。一覧に表示されるカードの内容は写真・評価・タグ・住所・点数です。カードの詳細を確認したい場合は、カードの画像をクリックすると詳細ページに遷移します。お気に入りボタン（ハート）も搭載しており、一覧ページもしくは詳細ページからクリック可能です。
+### 投稿カードについて
+#### 投稿〜一覧表示
+"NEW POST!"から投稿したカードはトップページに一覧表示されます（8枚/ページ）。一覧に表示されるカードの内容は写真・評価・タグ・住所・点数です。
+
+<img src="https://github.com/T-SGR3u/waiwai/blob/master/card.png" width="200" height="300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="https://github.com/T-SGR3u/waiwai/blob/master/index_all.png" width="700" height="400"> 
+
+カードの詳細を確認したい場合は、カードの画像をクリックすると詳細ページに遷移します。お気に入りボタン（ハート）も搭載しており、一覧ページもしくは詳細ページからクリック可能です。
+
+<img src="https://github.com/T-SGR3u/waiwai/blob/master/show.png" width="700" height="400"> 
+
 #### タグ機能
 カードに表示されているタグをクリックすることで、同名のタグが紐づいているカードだけを表示させることができる"タグ検索機能"を搭載しています。
 一覧ページからは名前及び住所の検索(Ransack)も可能にしているため、タグと検索を組み合わせて情報を絞り込めます。
 
 
-<img src="https://github.com/T-SGR3u/waiwai/blob/master/card.png" width="200" height="300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="" width="700" height="400"> 
+<img src="" width="700" height="400"> 
 
 #### ○GoogleMapについて
 投稿時に登録する住所を"geocoder"の機能で、緯度・経度を割り出して一覧ページのマップにスポットとしてマークすることができます。
