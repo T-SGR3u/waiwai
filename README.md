@@ -6,7 +6,8 @@
 ## 概要
 本アプリはおすすめしたい飲食店をカードとして簡単に投稿でき、さらに登録時の住所からGoogle Mapでお店の位置情報を示すことができます。
 気軽に投稿して、自分が好きな店を共有し合いましょう!
-※注意点
+</br>※注意点
+</br>
 ユーザー登録していない場合は、一覧ページ及び詳細ページしか閲覧することができません。
 投稿・お気に入りクリック・コメントをしたい場合は、ぜひログインを。
 
@@ -51,7 +52,7 @@
 - gmap4rails
 - geocoder</br>
 
-上記gemを利用して、GoogleMap表示及び登録住所からMapにマーカーを設置
+上記gemを利用して、GoogleMapの表示及び登録住所からマップにマーカーを設置。
 
 ```
 *application.html.haml
@@ -106,5 +107,76 @@
 ### お気に入り機能
 各カード及び詳細ページに搭載されているハートをクリックすることで、お気に入りのON/OFFを切り替えることができます。</br>
 ※ON:赤、OFF:黒
-さらに、ハートマークの横にはカウント機能があり、各ユーザーがクリックすると数字がカウントされていきます。
-この機能をAjaxを利用してリロード無しで切り替わるようにしています。
+さらに、ハートマークの横にはカウント機能があり、各ユーザーがクリックすると数字が加算されます。
+このお気に入り機能をAjaxを利用してリロード無しで切り替わるようにしています。
+
+```
+*index.html.haml
+ .btn-group.bg-success
+   .card-btn{id:"likes_buttons_#{post.id}"}
+     = render partial: "likes/like", locals: {post: post}
+   .text-white.ml-4.pt-2
+     user : 
+     = post.user.name
+```
+```
+*_like.html.haml
+
+-if user_signed_in?
+  -if current_user.already_liked?(post)
+    %button.btn.btn
+      .d-flex.form-inline.justify-content-center
+        = link_to post_like_path(post,post.id),class:"already-heart-btn ml-4" ,method: :delete ,remote: true do
+          =icon("fa","heart")
+        .heart-count.ml-3
+          =post.likes.count
+  -else
+    %button.btn.btn
+      .d-flex.form-inline.justify-content-center
+        = link_to post_likes_path(post) ,class:"heart-btn ml-4" ,method: :post ,remote: true do
+          = icon("fa","heart")
+        .heart-count.ml-3
+          =post.likes.count
+-else
+  %button.btn.btn
+    .d-flex.form-inline.justify-content-center
+      = icon("fa","heart")
+      .heart-count.ml-3
+        =post.likes.count
+```
+部分テンプレート(_like.html.haml)を利用し、renderでハートのON/OFFが切り替わるようにしています。
+リンクに"remote: true"を追加することで、likes_controllerにjs形式のリクエストを送信しています。
+
+```
+*likes_controller
+
+class LikesController < ApplicationController
+
+  def create
+    @post = Post.find(params[:post_id])
+    @like = current_user.likes.create(post_id: params[:post_id])
+  end
+
+  def destroy
+    @post = Post.find(params[:post_id])
+    @like = Like.find_by(post_id: params[:post_id], user_id: current_user.id)
+    @like.destroy
+  end
+
+end
+```
+
+```
+*create.js.erb
+
+$('#likes_buttons_<%= @post.id %>').html("<%= j(render partial: 'likes/like', locals: {post: @post}) %>");
+```
+
+```
+*destroy.js.erb
+
+$('#likes_buttons_<%= @post.id %>').html("<%= j(render partial: 'likes/like', locals: {post: @post}) %>");
+```
+
+
+
