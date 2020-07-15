@@ -14,9 +14,14 @@
         .heart-count.ml-3
           =post.likes.count
 -else
+  -# %button.btn.btn
+  -#   .d-flex.form-inline.justify-content-center
+  -#     = link_to post_likes_path(post) ,class:"heart-btn ml-4" ,method: :post ,remote: true do
+  -#       = icon("fa","heart")
+  -#     .heart-count.ml-3
+  -#       =post.likes.count
   %button.btn.btn
     .d-flex.form-inline.justify-content-center
-      = link_to post_likes_path(post) ,class:"heart-btn ml-4" ,method: :post ,remote: true do
-        = icon("fa","heart")
+      = icon("fa","heart")
       .heart-count.ml-3
         =post.likes.count
