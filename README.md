@@ -32,7 +32,7 @@
 一覧ページからは名前及び住所の検索(Ransack)も可能にしているため、タグと検索を組み合わせて情報を絞り込めます。
 
 
-<img src="https://github.com/T-SGR3u/waiwai/blob/master/tag_search.png" width="600" height="400"> 
+<img src="https://github.com/T-SGR3u/waiwai/blob/master/tag_index.png"> 
 
 ### GoogleMapについて
 投稿時に登録する住所を"geocoder"の機能で緯度・経度を割り出して,一覧ページのマップにスポットとしてマークすることができます。</br>
