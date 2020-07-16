@@ -1,6 +1,11 @@
  # WAIWAI
  
  URL:https://waiwaisgr3u.herokuapp.com/
+ 
+ テストアカウント 
+　　</br>login-email：test@com
+　　</br>password：111111
+
  ![トップページ](https://github.com/T-SGR3u/waiwai/blob/master/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202020-07-15%201.13.08.png)
  
 ## 概要
@@ -16,7 +21,7 @@
 #### 投稿 〜 一覧表示 〜 詳細ページ
 "NEW POST!"から投稿したカードはトップページに一覧表示されます（8枚/ページ）。一覧に表示されるカードの内容は写真・評価・タグ・住所・点数です。
 
-<img src="https://github.com/T-SGR3u/waiwai/blob/master/card.png" width="200" height="300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="https://github.com/T-SGR3u/waiwai/blob/master/index_all.png" width="700" height="400"> 
+<img src="https://github.com/T-SGR3u/waiwai/blob/master/card.png" width="200" height="300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="https://github.com/T-SGR3u/waiwai/blob/master/index_all.png" width="600" height="400"> 
 
 カードの詳細を確認したい場合は、カードの画像をクリックすると詳細ページに遷移します。お気に入りボタン（ハート）も搭載しており、一覧ページもしくは詳細ページからクリック可能です。
 
